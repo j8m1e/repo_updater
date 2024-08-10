@@ -26,8 +26,8 @@ def main(directory,repository,user_name,user_email,commit_time):
 
 
 def contribute(date,path):
-    with open(os.path.join(os.getcwd(), 'README.md'), 'a') as file:
-        file.write(message(date) + '\n\n')
+    # with open(os.path.join(os.getcwd(), 'README.md'), 'a') as file:
+    #     file.write(message(date) + '\n\n')
     run(['git', 'add', path])
     run(['git', 'commit', '-m', '"%s"' % message(date),
          '--date', date.strftime('"%Y-%m-%d %H:%M:%S"')])
