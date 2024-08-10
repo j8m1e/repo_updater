@@ -2,7 +2,7 @@ import os
 from subprocess import Popen
 
 
-def main(directory,repository,user_name,user_email,commit_time):
+def main(directory,repository):
     if repository is not None:
         start = repository.rfind('/') + 1
         end = repository.rfind('.')
@@ -10,19 +10,9 @@ def main(directory,repository,user_name,user_email,commit_time):
 
     os.chdir(directory)
 
-    if user_name is not None:
-        run(['git', 'config', 'user.name', user_name])
 
-    if user_email is not None:
-        run(['git', 'config', 'user.email', user_email])
 
-    contribute(commit_time)
 
-    if repository is not None:
-        run(['git', 'push', '-u', 'origin', 'main'])
-
-    print('\nRepository generation ' +
-          '\x1b[6;30;42mcompleted successfully\x1b[0m!')
 
 
 def contribute(date,path):
