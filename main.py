@@ -3,13 +3,13 @@ import datetime
 import git_commit
 import argparse
 
-def list_file_dates(directory,test):
-    print()
+def list_file_dates(directory,test,private):
     file_dates = {}
     exclude_prefixes = ('__', '.')  # exclusion prefixes
     os.chdir(directory)
-    if '.git' not in os.listdir(directory):
+    if '.git' not in os.listdir(directory) or test:
         print("git isn't initialized, initializing")
+        git_commit.init(directory,private,test)
     for root, dirs, files in os.walk('.'):
         dirs[:] = [dirname for dirname in dirs if not dirname.startswith(exclude_prefixes)]
         files = [x for x in files if not x.startswith(exclude_prefixes)]
@@ -43,21 +43,15 @@ parser.add_argument('directory', default = '.',
                     help='directory that will be commited and pushed')
 parser.add_argument('-T','--test', action='store_true', default=False,
                     help='test the list without commiting')
-
+parser.add_argument('-P','--private',action='store_true',default = False, help='public or private repository')
 args = parser.parse_args()
 test = args.test
 directory_path = args.directory
+private = args.private
 
-
-list_file_dates(directory_path,test)
+list_file_dates(directory_path,test,private)
 
 if not test:
     git_commit.run(['git', 'push'])
     print('\nRepository generation ' +
             '\x1b[6;30;42mcompleted successfully\x1b[0m!')
-
-
-# git init
-# gh repo create [<name>] --private -s .
-
-#git push origin main
