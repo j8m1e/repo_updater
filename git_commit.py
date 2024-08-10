@@ -3,10 +3,11 @@ from subprocess import Popen
 
 
 def init(directory,private = False,test= True):
-    print(directory,private,test)
+    name = os.path.abspath(directory).split('/')[-1]
+    argstring = '--private' if private else '--public'
     if not test:
         run(['git', 'init'])
-        run(['gh', 'repo', 'create', '[<name>]', '--private', '-s', '.'])
+        run(['gh', 'repo', 'create', name, argstring, '-s', '.'])
 
 
 
