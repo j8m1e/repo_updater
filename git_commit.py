@@ -2,13 +2,11 @@ import os
 from subprocess import Popen
 
 
-def main(directory,repository):
-    if repository is not None:
-        start = repository.rfind('/') + 1
-        end = repository.rfind('.')
-        directory = repository[start:end]
-
-    os.chdir(directory)
+def init(directory,private = False,test= True):
+    print(directory,private,test)
+    if not test:
+        run(['git', 'init'])
+        run(['gh', 'repo', 'create', '[<name>]', '--private', '-s', '.'])
 
 
 
