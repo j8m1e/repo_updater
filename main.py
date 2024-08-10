@@ -4,7 +4,7 @@ import time
 import git_commit
 
 def list_file_dates(directory):
-
+    print()
     file_dates = {}
     exclude_prefixes = ('__', '.')  # exclusion prefixes
     for root, dirs, files in os.walk(directory):
