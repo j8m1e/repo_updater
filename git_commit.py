@@ -37,5 +37,5 @@ def run(commands):
     Popen(commands).wait()
 
 
-def message(date):
-    return date.strftime('Contribution: %Y-%m-%d %H:%M')
+def message(path):
+    return "updated %s" %path
