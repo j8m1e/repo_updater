@@ -7,7 +7,9 @@ def list_file_dates(directory,test,private):
     file_dates = {}
     exclude_prefixes = ('__', '.')  # exclusion prefixes
     os.chdir(directory)
-    if '.git' not in os.listdir(directory) or test:
+    #print(directory)
+    #print(os.listdir('.'))
+    if '.git' not in os.listdir('.') or test:
         print("git isn't initialized, initializing")
         git_commit.init(directory,private,test)
     for root, dirs, files in os.walk('.'):
